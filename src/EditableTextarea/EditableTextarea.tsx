@@ -1,13 +1,11 @@
-import React, {MutableRefObject} from 'react';
+import React from 'react';
 import {IEditableTextareaOptions} from "./hooks/useEditableTextarea.hook";
 
-interface T {
-}
 
-const EditableTextarea: React.FC<IEditableTextareaOptions<T>> = React.forwardRef<HTMLDivElement, IEditableTextareaOptions<T>>((props, ref) => {
+const EditableTextarea: React.FC<IEditableTextareaOptions> = React.forwardRef<HTMLDivElement, IEditableTextareaOptions>((props, ref) => {
     return (
         <div ref={ref}>
-            { props.structure }
+            { props.structure.struct }
         </div>
     );
 });

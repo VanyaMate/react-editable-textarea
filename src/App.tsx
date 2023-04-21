@@ -9,7 +9,7 @@ const App = () => {
     return (
         <div>
             <input value={options.value.get()} onChange={(e) => options.value.set(e.target.value)}/>
-            <EditableTextarea {...options} ref={ref}/>
+            <EditableTextarea ref={ref} {...options}/>
             <button onClick={() => console.log(options.value.get(), ref.current?.textContent)}>Get</button>
         </div>
     );

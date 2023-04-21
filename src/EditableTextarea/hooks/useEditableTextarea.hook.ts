@@ -1,8 +1,10 @@
 import {MutableRefObject, useCallback, useMemo, useRef, useState} from "react";
+import {EditableComponents} from "../editable-components.config";
 
-export interface IEditableStructurePoint<T> {
-    data: IEditableStructurePoint<T>[] | IEditableStructurePoint<T> | string,
-    type: T,
+export interface IEditableStructurePoint {
+    struct: IEditableStructurePoint[] | IEditableStructurePoint | string,
+    type: EditableComponents,
+    data: any,
 }
 
 export interface IEditableTextareaProps {
@@ -10,30 +12,30 @@ export interface IEditableTextareaProps {
     value: string,
 }
 
-export interface IEditableTextareaOptions<T> {
+export interface IEditableTextareaOptions {
     value: { get: () => string, set: (value: string) => void },
     edit: { value: boolean, set: (value: boolean) => void },
     edited: { value: boolean, set: (value: boolean) => void },
-    structure: IEditableStructurePoint<T>,
+    structure: IEditableStructurePoint,
 }
 
-export type EditableTextareaValue<T> = [
+export type EditableTextareaValue = [
     MutableRefObject<HTMLDivElement|null>,
-    IEditableTextareaOptions<T>,
+    IEditableTextareaOptions,
 ]
 
-export const useEditableTextarea = function<T> (props: IEditableTextareaProps): EditableTextareaValue<T> {
+export const useEditableTextarea = function (props: IEditableTextareaProps): EditableTextareaValue {
     const [currentValue, setCurrentValue] = useState<string>(props.value);
     const [editable, setEditable] = useState<boolean>(props.edit);
     const [edited, setEdited] = useState<boolean>(false);
     const ref = useRef<HTMLDivElement|null>(null);
 
-    const structure = useMemo<IEditableStructurePoint<T>>(() => {
+    const structure = useMemo<IEditableStructurePoint>(() => {
         try {
-            return { data: JSON.parse(currentValue), type: T.CONTAINER }
+            return { struct: JSON.parse(currentValue), data: null, type: EditableComponents.CONTAINER }
         }
         catch (_) {
-            return { data: currentValue, type: T.CONTAINER }
+            return { struct: currentValue, data: null, type: EditableComponents.CONTAINER }
         }
     }, [currentValue]);
 
