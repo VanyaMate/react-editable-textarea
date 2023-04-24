@@ -1,55 +1,25 @@
-import {MutableRefObject, useCallback, useMemo, useRef, useState} from "react";
-import {EditableComponents} from "../editable-components.config";
+import {useRef} from "react";
+import {IEditableTextareaDataPoint} from "../types/EditableTextareaDataPoint";
+import ComponentInjector from "../components/ComponentInjector";
 
-export interface IEditableStructurePoint {
-    struct: IEditableStructurePoint[] | IEditableStructurePoint | string,
-    type: EditableComponents,
-    data: any,
-}
-
-export interface IEditableTextareaProps {
+export interface IUseEditableTextareaProps {
+    data: IEditableTextareaDataPoint,
     edit: boolean,
-    value: string,
+    components: {},
 }
 
-export interface IEditableTextareaOptions {
-    value: { get: () => string, set: (value: string) => void },
-    edit: { value: boolean, set: (value: boolean) => void },
-    edited: { value: boolean, set: (value: boolean) => void },
-    structure: IEditableStructurePoint,
+export interface IUseEditableTextareaText {
+    edit: boolean,
+    text: string,
 }
 
-export type EditableTextareaValue = [
-    MutableRefObject<HTMLDivElement|null>,
-    IEditableTextareaOptions,
-]
+export const useEditableTextarea = function (props: IUseEditableTextareaProps) {
+    const root = ComponentInjector()
 
-export const useEditableTextarea = function (props: IEditableTextareaProps): EditableTextareaValue {
-    const [currentValue, setCurrentValue] = useState<string>(props.value);
-    const [editable, setEditable] = useState<boolean>(props.edit);
-    const [edited, setEdited] = useState<boolean>(false);
-    const ref = useRef<HTMLDivElement|null>(null);
+    const methods = {
+        getState: () => console.log('return props'),
+        toggleEdit: () => console.log('toggled'),
+    };
 
-    const structure = useMemo<IEditableStructurePoint>(() => {
-        try {
-            return { struct: JSON.parse(currentValue), data: null, type: EditableComponents.CONTAINER }
-        }
-        catch (_) {
-            return { struct: currentValue, data: null, type: EditableComponents.CONTAINER }
-        }
-    }, [currentValue]);
-
-    const value = useCallback(() => {
-        return currentValue;
-    }, [structure]);
-
-    return [
-        ref,
-        {
-            value: { get: value, set: setCurrentValue },
-            edit: { value: editable, set: setEditable },
-            edited: { value: edited, set: setEdited },
-            structure,
-        },
-    ]
+    return [root, methods];
 }

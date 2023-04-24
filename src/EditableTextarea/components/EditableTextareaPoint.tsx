@@ -1,25 +1,11 @@
-import React, {useContext} from 'react';
-import {EditContext} from "../context/EditContext";
+import React from 'react';
 
-export interface IEditableTextareaPoint {
-    text: string,
-}
-
-/**
- *
- *  Компонент для редактирования текста внутри компонентов
- *
- */
-const EditableTextareaPoint: React.FC<IEditableTextareaPoint> = React.forwardRef<HTMLDivElement, IEditableTextareaPoint>((props, ref) => {
-    const edit = useContext<boolean>(EditContext);
-
+const EditableTextareaPoint = () => {
     return (
-        <div
-            ref={ref}
-            contentEditable={ edit }
-            dangerouslySetInnerHTML={{ __html: props.text }}
-        />
+        <div>
+            EditableTextareaPoint
+        </div>
     );
-});
+};
 
-export default React.memo(EditableTextareaPoint);
+export default EditableTextareaPoint;
