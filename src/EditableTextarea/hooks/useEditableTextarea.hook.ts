@@ -1,4 +1,4 @@
-import {useRef} from "react";
+import {useRef, useState} from "react";
 import {IEditableTextareaDataPoint} from "../types/EditableTextareaDataPoint";
 import ComponentInjector from "../components/ComponentInjector";
 
@@ -8,17 +8,13 @@ export interface IUseEditableTextareaProps {
     components: {},
 }
 
-export interface IUseEditableTextareaText {
-    edit: boolean,
-    text: string,
-}
-
 export const useEditableTextarea = function (props: IUseEditableTextareaProps) {
+    const [edit, setEdit] = useState<boolean>(props.edit);
     const root = ComponentInjector()
 
     const methods = {
         getState: () => console.log('return props'),
-        toggleEdit: () => console.log('toggled'),
+        toggleEdit: () => setEdit((mode) => !mode),
     };
 
     return [root, methods];

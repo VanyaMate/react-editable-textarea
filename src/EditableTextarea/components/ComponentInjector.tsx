@@ -7,7 +7,7 @@ export interface IComponentInjector extends IEditableTextareaDataPoint {
     lib: InjectorLib
 }
 
-const ComponentInjector: React.FC<IComponentInjector> = (props) => {
+const ComponentInjector: React.FC<IComponentInjector> = React.forwardRef<HTMLDivElement, IComponentInjector>((props, ref) => {
 
 
     return (
@@ -15,6 +15,6 @@ const ComponentInjector: React.FC<IComponentInjector> = (props) => {
 
         </>
     );
-};
+});
 
-export default ComponentInjector;
+export default React.memo(ComponentInjector);

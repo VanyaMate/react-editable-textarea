@@ -1,4 +1,5 @@
 import React from 'react';
+import {EditContent} from "./context/EditContent";
 
 export interface IEditableTextarea {
     data: string,
@@ -6,7 +7,13 @@ export interface IEditableTextarea {
 }
 
 const EditableTextarea: React.FC<IEditableTextarea> = React.forwardRef<HTMLDivElement, IEditableTextarea>((props, ref) => {
-    return <div>QQQ</div>
+
+
+    return (
+        <EditContent.Provider value={props.edit}>
+
+        </EditContent.Provider>
+    );
 });
 
 export default React.memo(EditableTextarea);
