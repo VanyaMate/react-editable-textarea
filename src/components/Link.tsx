@@ -1,5 +1,5 @@
 import React from 'react';
-import EditableTextareaPoint from "../EditableTextarea/components/EditableTextareaPoint";
+import EditableTextareaPoint from "../EditableTextarea/components/ETA_Text";
 import {IUseEditableComponentProps, useEditableComponent} from "../EditableTextarea/hooks/useEditableComponent.hook";
 
 interface Link {
