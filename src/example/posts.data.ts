@@ -16,9 +16,9 @@ export const data: IETA_Data = {
             content: '',
             props: {
                 list: [
-                    "строка 1",
+                    "строка 1 %%LINK_TO_LIST_2%%",
                     "строка 2 %%LINK_TO_LIST_2%%",
-                    "строка 3",
+                    "строка 3 %%введите имя%%",
                 ],
             },
             components: {

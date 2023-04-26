@@ -6,7 +6,7 @@ import {data} from "./example/posts.data";
 const App = () => {
     return (
         <div>
-            <ETA editMod={false} componentsList={PostsComponents} data={data}/>
+            <ETA editMod={true} componentsList={PostsComponents} data={data}/>
         </div>
     );
 };

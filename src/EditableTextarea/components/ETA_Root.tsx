@@ -5,7 +5,7 @@ export interface IETA_Root extends ETA_ComponentInjectData{}
 
 const ETA_Root: React.FC<IETA_Root> = (props) => {
     return (
-        <div data-eta-type={'__ROOT__'}>
+        <div data-eta-type={'__ROOT__'} data-eta-default={true}>
             { props.injected }
         </div>
     );
