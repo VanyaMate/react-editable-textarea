@@ -7,9 +7,9 @@ export interface ILink extends ETA_ComponentInjectData {
 
 const Link: React.FC<ILink> = (props) => {
     return (
-        <div data-eta-type={'LINK'}>
-            <a href={props.url}>{ props.injected }</a>
-        </div>
+        <span data-eta-type={props.type} data-eta-name={props.name}>
+            <a data-eta-attribute={'href:url'} href={props.url}>{ props.injected }</a>
+        </span>
     );
 };
 

@@ -1,4 +1,4 @@
-import {ETA_Data_props, IETA_Data} from "../interfaces/eta-data.interface";
+import {ETA_Data_props, IETA_Data, IETA_Data_middleware} from "../interfaces/eta-data.interface";
 import {IETA_Components} from "../interfaces/eta-components.interface";
 import React, {useContext} from "react";
 import {ETA_ComponentsList} from "../context/ETA_ComponentsList";
@@ -8,7 +8,7 @@ import ETA_Text from "../components/ETA_Text";
 
 const componentSplitFormat = /%%(.*?)%%/g;
 
-export const useETAMiddleware = function (data: IETA_Data): JSX.Element {
+export const useETAMiddleware = function (data: IETA_Data_middleware): JSX.Element {
     const splitText: string[] = data.content.split(componentSplitFormat);
     const userComponents = useContext<IETA_Components>(ETA_ComponentsList);
     const components: JSX.Element[] = [];
@@ -24,7 +24,7 @@ export const useETAMiddleware = function (data: IETA_Data): JSX.Element {
                 const UserComponent = userComponents[component.type];
 
                 if (!!DefaultComponent || !!UserComponent) {
-                    components.push(<ETA_Middleware key={i} {...component}/>);
+                    components.push(<ETA_Middleware key={i} {...component} name={componentName}/>);
                 } else {
                     components.push(<ETA_Text key={i} text={data.content}/>);
                 }
@@ -38,5 +38,5 @@ export const useETAMiddleware = function (data: IETA_Data): JSX.Element {
         return <ETA_Text text={data.content}/>;
     }
 
-    return <CurrentComponent injected={components} components={data.components} {...data.props}/>;
+    return <CurrentComponent injected={components} components={data.components} type={data.type} name={data.name} {...data.props}/>;
 }

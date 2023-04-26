@@ -10,7 +10,7 @@ const ETA_Text: React.FC<IETA_Text> = (props) => {
     const editMode = useContext<boolean>(ETA_EditContext);
 
     return (
-        <div
+        <span
             data-eta-type={'__TEXT__'}
             contentEditable={editMode}
             dangerouslySetInnerHTML={{ __html: props.text }}
