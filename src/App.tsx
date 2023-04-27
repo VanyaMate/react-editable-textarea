@@ -1,17 +1,18 @@
 import React from "react";
-import {useEditableTextarea} from "./EditableTextarea/hooks/useEditableTextarea.hook";
-import EditableTextarea from "./EditableTextarea/EditableTextarea";
-import {EditableComponents} from "./EditableTextarea/editable-components.config";
+import {useEta} from "./ETA/hooks/useEta";
 
 const App = () => {
-    const [ref, options] = useEditableTextarea<EditableComponents>({ value: 'text', edit: false });
+    const [eta, methods] = useEta({
+        editMode: false,
+        text: 'string'
+    })
 
     return (
         <div>
-            <input value={options.value.get()} onChange={(e) => options.value.set(e.target.value)}/>
-            <button onClick={() => options.edit.set(!options.edit.value)}>ToggleEditMod</button>
-            <EditableTextarea ref={ref} {...options}/>
-            <button onClick={() => console.log(options.value.get(), ref.current?.textContent)}>Get</button>
+            <button onClick={() => console.log(methods.getString())}>getString</button>
+            <button onClick={() => console.log(methods.toggleEditMode())}>getString</button>
+            <button onClick={() => console.log(methods.getEditMode())}>getString</button>
+            { eta }
         </div>
     );
 };
