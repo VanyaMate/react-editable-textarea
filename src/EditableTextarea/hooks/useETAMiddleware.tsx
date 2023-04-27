@@ -38,5 +38,11 @@ export const useETAMiddleware = function (data: IETA_Data_middleware): JSX.Eleme
         return <ETA_Text text={data.content}/>;
     }
 
-    return <CurrentComponent injected={components} components={data.components} type={data.type} name={data.name} {...data.props}/>;
+    return <CurrentComponent
+        injected={components}
+        components={data.components}
+        type={data.type}
+        name={data.name || ''}
+        {...data.props}
+    />;
 }

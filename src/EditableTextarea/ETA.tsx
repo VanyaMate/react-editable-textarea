@@ -5,6 +5,7 @@ import {IETA_Components} from "./interfaces/eta-components.interface";
 import ETA_Middleware from "./components/ETA_Middleware";
 import {IETA_Data} from "./interfaces/eta-data.interface";
 import ETA_Text from "./components/ETA_Text";
+import ETA_Root from "./components/ETA_Root";
 
 export interface IETA {
     editMod: boolean,
@@ -18,7 +19,7 @@ const ETA: React.FC<IETA> = (props) => {
             <ETA_ComponentsList.Provider value={props.componentsList}>
                 {
                     typeof props.data === 'string'
-                        ? <ETA_Text text={props.data}/>
+                        ? <ETA_Root injected={[<ETA_Text text={props.data}/>]} type={'__ROOT__'}/>
                         : <ETA_Middleware {...props.data}/>
                 }
             </ETA_ComponentsList.Provider>
