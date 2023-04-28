@@ -3,9 +3,7 @@ import {ETA_Props} from "../types/ETA_Props";
 
 const ETA: React.FC<ETA_Props> = (props) => {
     return (
-        <div>
-
-        </div>
+        <div eta-type={'__ROOT__'}/>
     );
 };
 
